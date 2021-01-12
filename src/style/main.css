@@ -1,0 +1,36 @@
+.interact {
+	position: absolute;
+	bottom: 20;
+	width: 100%;
+	text-align: center;
+	color: #fff;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.sidetext {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 20%;
+	right: 0;
+	padding-left: 100px;
+	padding-right: 50px;
+	color: white;
+	line-height: 2;
+	font-family: Arial, Helvetica, sans-serif;
+	background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4) 10%, rgba(0, 0, 0, 1) 100%);
+}
+.sidetext-title {
+}
+.sidetext-description {
+	height: 70%;
+}
+.sidetext-instruction {
+	font-size: 1.5em;
+	text-align: center;
+}
+
+.isHidden {
+	display: none;
+}

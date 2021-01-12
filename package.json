@@ -1,0 +1,28 @@
+{
+	"name": "digital-museum",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "parcel ./src/index.html",
+		"build": "parcel build ./src/index.html --public-url ./"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/SzymonSzymczak/digital-museum.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/SzymonSzymczak/digital-museum/issues"
+	},
+	"homepage": "https://github.com/SzymonSzymczak/digital-museum#readme",
+	"dependencies": {
+		"textures": "^1.2.2",
+		"three": "^0.124.0"
+	},
+	"devDependencies": {
+		"cssnano": "^4.1.10"
+	}
+}
