@@ -1,0 +1,103 @@
+[
+	{
+		"name": "Amenemhat_iii",
+		"separate_materials": 2,
+		"title": "Amenemhat III",
+		"desc": "Colossal granodiorite head of Amenemhat III: his face is broader; the eyes, which would originally have been inlaid, are widely spaced and not heavily hooded. The lips are full. Diagonal muscles under the lower lip suggest tension in the heavy jaw. His expression is sombre, but it seems harsh, even brutal."
+	},
+	{
+		"name": "hoa-hakananaia",
+		"separate_materials": false,
+		"title": "Hoa Hakananai'a",
+		"desc": "Ancestor figure 'moai', called Hoa Hakananai'a (hidden or stolen friend) made of basalt. Images relating to the bird man religion (tangata manu); birds, vulvas, dance paddles in the form of stylizes human figure, a ring and a girdle design are carved in relief on the back of the figure's head and body."
+	},
+	{
+		"name": "rosetta",
+		"separate_materials": false,
+		"title": "The Rosetta Stone",
+		"desc": "Part of grey and pink granodiorite stela bearing priestly decree concerning Ptolemy V in three blocks of text: Hieroglyphic (14 lines), Demotic (32 lines) and Greek (54 lines)."
+	},
+	{
+		"name": "Amenhotep_III",
+		"separate_materials": false,
+		"title": "Seated statue of Amenhotep III",
+		"desc": "This colossus of Amenhotep III, whose distinctive facial features are still recognizable despite their damaged state, once adorned the temple he built to Amen-Re in Luxor (ancient Thebes). Like so many Dynasty 18 monuments, this statue, along with its partner (22.5.1), was usurped a century and a half later by Merneptah, who had it moved from its original location to the eastern portal of the temple. Merneptah's deeply incised titulary contrasts with the restrained carving of the sema tawy (\"Unification of the Two Lands\") motif on both sides of the throne of the other, larger colossus. While the broad, flat planes and bold proportions are typical of Egyptian architectural statuary, these two pieces are distinguished by the quality of their sculptural details, such as the rendering of the faces and the elements of the costumes."
+	},
+	{
+		"name": "jericho",
+		"separate_materials": false,
+		"title": "The Jericho Skull",
+		"desc": "A plastered human skull; the skull was taken as the base and the features of the face were modelled on it in plaster. One eye is made from a bivalve shell divided in two. The other has one, smaller, complete shell in place and is missing its twin. Culture/period: Pre-Pottery Neolithic B (8500 BC- 6000BC)",
+		"with_stand": true
+	},
+	{
+		"name": "ramesses_ii",
+		"separate_materials": 2,
+		"title": "Statue of Ramesses II, the 'Younger Memnon'",
+		"desc": "One of the largest pieces of Egyptian sculpture in the British Museum, this statue shows Ramesses II, who succeeded his father Sethos I in around 1279 BC and ruled Egypt for 67 years."
+	},
+	{
+		"name": "sarcophagus",
+		"separate_materials": 2,
+		"title": "Red Granite Sarcophagus",
+		"desc": "Red granite sarcophagus decorated with palace-façade panelling; slightly vaulted lid retains handling-bosses at either end."
+	},
+	{
+		"name": "statueRoy",
+		"separate_materials": false,
+		"title": "A statue of Roy, High Priest of Amun",
+		"desc": "Granodiorite squatting figure of Roy, High Priest of Amun during the reigns of Ramses II, Merenptah and Sety II, holding a Hathor-headed sistrum before, the dorsal pillar is inscribed with two vertical registers of hieroglyphs - invocations to Amun-Ra and Mut; lower section lost. 19th Dynasty, dating to circa 1220 BC. Found in Thebes, Egypt. \nHeight: 88 centimetres (Original) Height: 113 centimetres (Restored)"
+	},
+	{
+		"name": "sekhmet",
+		"separate_materials": false,
+		"title": "Statue of Sekhmet",
+		"desc": "Black granodiorite statue of Sekhmet: showing the goddess as a woman with the head of a lioness but a divine female wig. She is standing with left foot forward, holding papyrus sceptre in left hand and 'ankh' in right, most of right arm missing, sun-disc on head, wearing striated lappet wig with uraeus on forehead, broken."
+	},
+	{
+		"name": "rameses_head",
+		"separate_materials": false,
+		"title": "Head of a 19th Dynasty Pharoah",
+		"desc": "Head and upper body of pink/grey granite monumental statue of Ramses II (one of a pair placed before the door of the Ramesseum) wearing nemes head-cloth and circlet of uraei (about half now lost), the sculptor has exploited the bichrome nature of the stone to emphasise the division between body and face; the dorsal pillar is inscribed with vertical registers of hieroglyphs - giving the name and titles of the king and part of a dedication to Amun-Ra; in 1817 it was noted that there were traces of colour upon the statue and it may have, therefore, been painted red in antiquity."
+	},
+	{
+		"name": "lion-of-amenhotep-iii",
+		"separate_materials": 2,
+		"title": "Red granite lion of Amenhotep III",
+		"desc": "Red granite statue of lion of Amenhotep III: this lion is depicted in a recumbent pose, forming a mirror image to its companion piece. It lies on its side: the forepaws crossed, the farther of the hind paws emerging from under the nearer one, the tail curling forward around the rump and resting on the base. The sculpture combines marvelously the stylized mane and hair with a naturalistic treatment of the body. The muzzle projects realistically, with solid jawbones and raised veins. A stylized circular mane frames the head, and the fur is rendered by a raised surface on the chest, the shoulders, and the back. The eyes are hollowed and were probably inlaid. The whiskers are incised on the muzzle; small, round protuberances in the ear suggest the tufts of hair."
+	},
+	{
+		"name": "ram-of-amun",
+		"separate_materials": false,
+		"title": "The ram of Amun",
+		"desc": "Granitic gneiss sphinx of the ram of Amun protecting figure of Taharqo between folded front legs; the rectangular base, which has been partially restored, is inscribed with a continuous horizontal register of hieroglyphs."
+	},
+	{
+		"name": "canopic_jar_lid",
+		"separate_materials": false,
+		"title": "A canopic jar lid",
+		"desc": "EA 36637\n Calcite canopic jar lid in the form of the human-headed deity Imsety, belonging to Gemenefhorbak.\nImsety was one of the four ‘Sons of Horus’ who magically protected the mummified internal organs, which were stored in four canopic jars and buried with the deceased.",
+		"with_stand": true
+	},
+	{
+		"name": "cuneiform-tablet",
+		"separate_materials": false,
+		"title": "Cuneiform tablet",
+		"desc": "Clay cuneiform tablet. Astronomical procedure text for Jupiter; mathematical rules for the area of a trapezoid.",
+		"with_stand": true
+	},
+	{
+		"name": "cuneiform-tablet_ii",
+		"separate_materials": false,
+		"title": "Cuneiform tablet",
+		"desc": "Fragment of a clay tablet, 14 lines of inscription. Neo-Assyrian.",
+		"with_stand": true
+	},
+	{
+		"name": "horus",
+		"separate_materials": false,
+		"title": "Horus",
+		"desc": "Granodiorite statue of a Horus-falcon, beak and one eye restored, the other eye is inlaid with ivory and bitumen.",
+		"with_stand": true
+	}
+]

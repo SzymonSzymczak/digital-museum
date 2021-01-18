@@ -1,35 +1,39 @@
 import * as THREE from 'three';
 import { objectModule } from './modules/objectModule.js';
 import { materialModule } from './modules/materialsModule';
-objectModule.init();
+import 'regenerator-runtime/runtime';
+import data from '../data.json';
 
-// objectModule.spawnObject(
-// 	require('../assets/Amenemhat_iii/Amenemhat_iii.obj'),
-// 	(object) => {
-// 		object.children[0].material = [materialModule.Amenemhat_iii_0, materialModule.Amenemhat_iii_1];
-// 	},
-// 	[0, 1.8, 0],
-// 	[1, 1, 1],
-// 	[-2, 0, -6],
-// );
+const start = async function () {
+	await objectModule.init();
+	for (let i = 0; i < data.length; i++) {
+		if (i <= 7) {
+			await objectModule.spawnObject(data[i], data[i].separate_materials, [0, 1.5708, 0], [1, 1, 1], [i * -5, 0, -6], true);
+		} else if (i <= 15) {
+			await objectModule.spawnObject(data[i], data[i].separate_materials, [0, -1.5708, 0], [1, 1, 1], [i * -5 - 8 * -5, 0, 6], true);
+		}
+	}
+	console.log('loaded');
+	const event = new Event('renderFrame');
+	document.dispatchEvent(event);
+	console.log('start');
+};
 
-for (let i = 0; i < 9; i++) {
-	objectModule.spawnObject(
-		require('../assets/Amenemhat_iii/Amenemhat_iii.obj'),
-		(object) => {
-			object.children[0].material = [materialModule.Amenemhat_iii_0, materialModule.Amenemhat_iii_1];
-		},
-		[0, 1.8, 0],
-		[1, 1, 1],
-		[i * -5, 0, -6],
-		true,
-	);
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+	document.querySelector('.controls').classList.remove('isHidden');
+
+	for (let button of document.querySelectorAll('.js-button')) {
+		button.addEventListener('touchstart', () => {
+			let keycode = button.getAttribute('keycode');
+			let event = new KeyboardEvent('keydown', { keyCode: keycode });
+			document.dispatchEvent(event);
+		});
+		button.addEventListener('touchend', () => {
+			let keycode = button.getAttribute('keycode');
+			let event = new KeyboardEvent('keyup', { keyCode: keycode });
+			document.dispatchEvent(event);
+		});
+	}
 }
-console.log('loaded');
-const event = new Event('renderFrame');
-document.dispatchEvent(event);
-// setTimeout(() => {
-// 	console.log('start');
-// 	const event = new Event('renderFrame');
-// 	document.dispatchEvent(event);
-// }, 500);
+
+start();

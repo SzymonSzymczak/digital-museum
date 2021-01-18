@@ -3,7 +3,7 @@ import { materialModule } from './materialsModule';
 import { objectModule } from './objectModule';
 
 export const buildingModule = (function () {
-	const spawnBuilding = function (scene) {
+	const spawnBuilding = async function (scene) {
 		// FLOOR
 		var geometry = new THREE.PlaneBufferGeometry(50, 16, 1, 1);
 		var floor = new THREE.Mesh(geometry, materialModule.floorMaterial());
@@ -109,17 +109,7 @@ export const buildingModule = (function () {
 		// COLUMNS
 		for (let z = 0; z < 2; z++) {
 			for (let i = 0; i < 4; i++) {
-				objectModule.spawnObject(
-					require('../../assets/Ionic_Column/Ionic_Column.obj'),
-					(obj) => {
-						for (let child of obj.children) {
-							child.material = materialModule.columnMaterial;
-						}
-					},
-					[0, 0, 0],
-					[11, 11, 11],
-					[i * -10 - 7.5, -0.1, z * 10 - 5],
-				);
+				await objectModule.spawnObject({ name: 'Ionic_Column' }, false, [0, 0, 0], [11, 11, 11], [i * -10 - 7.5, -0.1, z * 10 - 5]);
 			}
 		}
 	};

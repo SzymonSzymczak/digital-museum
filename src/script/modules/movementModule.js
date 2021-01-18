@@ -25,12 +25,13 @@ export const movementModule = (function () {
 	let savedCameraPosition;
 	let savedCameraRotation;
 	const raycaster = new THREE.Raycaster();
+	const collisionRaycaster = new THREE.Raycaster();
 	const cursor = new THREE.Vector2(0, 0);
 
 	const direction = new THREE.Vector3();
 	let speed = 6;
 
-	const initializeMovement = (cam, sceneAtr, renderer) => {
+	const initializeMovement = async (cam, sceneAtr, renderer) => {
 		if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
 			// true for mobile device
 			controls = new DeviceOrientationControls(cam);
@@ -52,8 +53,10 @@ export const movementModule = (function () {
 		orbitControls = new OrbitControls(cam, renderer.domElement);
 		orbitControls.enabled = false;
 
-		raycaster.near = 0.2;
+		raycaster.near = 0;
 		raycaster.far = 5;
+		collisionRaycaster.near = 0;
+		collisionRaycaster.far = 0.6;
 		camera = cam;
 		scene = sceneAtr;
 
@@ -66,69 +69,23 @@ export const movementModule = (function () {
 
 		// MOBILE
 
-		if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-			listenerMouseDown = document.addEventListener('touchstart', () => {
-				mouseDown = true;
-			});
-			listenerMouseUp = document.addEventListener('touchend', () => {
-				mouseDown = false;
-			});
-		}
+		// if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+		// 	listenerMouseDown = document.addEventListener('touchstart', () => {
+		// 		mouseDown = true;
+		// 	});
+		// 	listenerMouseUp = document.addEventListener('touchend', () => {
+		// 		mouseDown = false;
+		// 	});
+		// }
 
 		let intersects = [];
+		let collisionIntersects = [];
 		let previousFrame = getMilliseconds();
 
 		function movement() {
 			requestAnimationFrame(movement);
 			let frameStart = getMilliseconds();
 			let frameTime = frameStart - previousFrame;
-			// MOVEMENT KEYS
-			if (keyDown.w) {
-				camera.getWorldDirection(direction);
-				let total = Math.abs(direction.x) + Math.abs(direction.z);
-				direction.x = direction.x / total;
-				direction.z = direction.z / total;
-				direction.y = 0;
-				camera.position.addScaledVector(direction, (speed / 1000) * frameTime);
-			}
-			if (keyDown.s) {
-				camera.getWorldDirection(direction);
-				let total = Math.abs(direction.x) + Math.abs(direction.z);
-				direction.x = direction.x / total;
-				direction.z = direction.z / total;
-				direction.y = 0;
-				camera.position.addScaledVector(direction.negate(), (speed / 1000) * frameTime);
-			}
-			if (keyDown.a) {
-				camera.getWorldDirection(direction);
-				direction.y = 0;
-				let total = Math.abs(direction.x) + Math.abs(direction.z);
-				direction.x = direction.x / total;
-				direction.z = direction.z / total;
-				var axis = new THREE.Vector3(0, 1, 0);
-				var angle = Math.PI / 2;
-				camera.position.addScaledVector(direction.applyAxisAngle(axis, angle), (speed / 1000) * frameTime);
-			}
-			if (keyDown.d) {
-				camera.getWorldDirection(direction);
-				direction.y = 0;
-				let total = Math.abs(direction.x) + Math.abs(direction.z);
-				direction.x = direction.x / total;
-				direction.z = direction.z / total;
-				var axis = new THREE.Vector3(0, 1, 0);
-				var angle = -Math.PI / 2;
-				camera.position.addScaledVector(direction.applyAxisAngle(axis, angle), (speed / 1000) * frameTime);
-			}
-
-			// MOVEMENT MOBILE
-			if (mouseDown) {
-				camera.getWorldDirection(direction);
-				let total = Math.abs(direction.x) + Math.abs(direction.z);
-				direction.x = direction.x / total;
-				direction.z = direction.z / total;
-				direction.y = 0;
-				camera.position.addScaledVector(direction, (speed / 1000) * frameTime);
-			}
 
 			// INTERACTION
 
@@ -182,6 +139,107 @@ export const movementModule = (function () {
 			} else {
 				interactText.classList.add('isHidden');
 				lookedAtObject = undefined;
+			}
+			if (!orbitControls.enabled) {
+				// COLLISION DETECTION
+				if (keyDown.w || keyDown.a || keyDown.s || keyDown.d) {
+					camera.getWorldDirection(direction);
+					direction.y = 0;
+					let total = Math.abs(direction.x) + Math.abs(direction.z);
+					direction.x = direction.x / total;
+					direction.z = direction.z / total;
+					if (keyDown.w && keyDown.a) {
+						var axis = new THREE.Vector3(0, 1, 0);
+						var angle = Math.PI / 4;
+						direction.applyAxisAngle(axis, angle);
+					} else if (keyDown.w && keyDown.d) {
+						var axis = new THREE.Vector3(0, 1, 0);
+						var angle = -Math.PI / 4;
+						direction.applyAxisAngle(axis, angle);
+					} else if (keyDown.s && keyDown.d) {
+						direction.negate();
+						var axis = new THREE.Vector3(0, 1, 0);
+						var angle = Math.PI / 4;
+						direction.applyAxisAngle(axis, angle);
+					} else if (keyDown.s && keyDown.a) {
+						direction.negate();
+						var axis = new THREE.Vector3(0, 1, 0);
+						var angle = -Math.PI / 4;
+						direction.applyAxisAngle(axis, angle);
+					} else if (keyDown.s) {
+						direction.negate();
+					} else if (keyDown.a) {
+						var axis = new THREE.Vector3(0, 1, 0);
+						var angle = Math.PI / 2;
+						direction.applyAxisAngle(axis, angle);
+					} else if (keyDown.d) {
+						var axis = new THREE.Vector3(0, 1, 0);
+						var angle = -Math.PI / 2;
+						direction.applyAxisAngle(axis, angle);
+					}
+					collisionRaycaster.set(camera.position, direction);
+					collisionIntersects = collisionRaycaster.intersectObjects(scene.children, true);
+					if (collisionIntersects.length >= 1) {
+						previousFrame = frameStart;
+						return;
+					}
+					let camPosBelow = camera.position.clone();
+					camPosBelow.y -= 1;
+					collisionRaycaster.set(camPosBelow, direction);
+					collisionIntersects = collisionRaycaster.intersectObjects(scene.children, true);
+					if (collisionIntersects.length >= 1) {
+						previousFrame = frameStart;
+						return;
+					}
+				}
+
+				// MOVEMENT KEYS
+				if (keyDown.w) {
+					camera.getWorldDirection(direction);
+					let total = Math.abs(direction.x) + Math.abs(direction.z);
+					direction.x = direction.x / total;
+					direction.z = direction.z / total;
+					direction.y = 0;
+					camera.position.addScaledVector(direction, (speed / 1000) * frameTime);
+				}
+				if (keyDown.s) {
+					camera.getWorldDirection(direction);
+					let total = Math.abs(direction.x) + Math.abs(direction.z);
+					direction.x = direction.x / total;
+					direction.z = direction.z / total;
+					direction.y = 0;
+					camera.position.addScaledVector(direction.negate(), (speed / 1000) * frameTime);
+				}
+				if (keyDown.a) {
+					camera.getWorldDirection(direction);
+					direction.y = 0;
+					let total = Math.abs(direction.x) + Math.abs(direction.z);
+					direction.x = direction.x / total;
+					direction.z = direction.z / total;
+					var axis = new THREE.Vector3(0, 1, 0);
+					var angle = Math.PI / 2;
+					camera.position.addScaledVector(direction.applyAxisAngle(axis, angle), (speed / 1000) * frameTime);
+				}
+				if (keyDown.d) {
+					camera.getWorldDirection(direction);
+					direction.y = 0;
+					let total = Math.abs(direction.x) + Math.abs(direction.z);
+					direction.x = direction.x / total;
+					direction.z = direction.z / total;
+					var axis = new THREE.Vector3(0, 1, 0);
+					var angle = -Math.PI / 2;
+					camera.position.addScaledVector(direction.applyAxisAngle(axis, angle), (speed / 1000) * frameTime);
+				}
+
+				// MOVEMENT MOBILE
+				if (mouseDown) {
+					camera.getWorldDirection(direction);
+					let total = Math.abs(direction.x) + Math.abs(direction.z);
+					direction.x = direction.x / total;
+					direction.z = direction.z / total;
+					direction.y = 0;
+					camera.position.addScaledVector(direction, (speed / 1000) * frameTime);
+				}
 			}
 			previousFrame = frameStart;
 			if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
