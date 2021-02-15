@@ -13,10 +13,13 @@ const start = async function () {
 			await objectModule.spawnObject(data[i], data[i].separate_materials, [0, -1.5708, 0], [1, 1, 1], [i * -5 - 8 * -5, 0, 6], true);
 		}
 	}
-	console.log('loaded');
 	const event = new Event('renderFrame');
 	document.dispatchEvent(event);
-	console.log('start');
+	loaded();
+};
+
+const loaded = () => {
+	document.querySelector('.loader').classList.add('isHidden');
 };
 
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
